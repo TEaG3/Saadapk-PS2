@@ -1,60 +1,40 @@
-# Saad PS2 Ultimate — Real Test Lab
+# Saad PS2 Emulator
 
-**Standalone Windows test application** for validating PS2/PS1 game-library workflows, OPL artwork, USB storage operations, catalog integrity, and emulator integration.
+واجهة تشغيل ألعاب PlayStation 2 على Windows، تعتمد على محرك المحاكاة مفتوح المصدر PCSX2. هذا المستودع مستقل تماماً عن موقع Saad PS2 الأصلي وتطبيقاته.
 
-This repository is the dedicated home for the independent Test Lab. It is separate from the Saad PS2 website and its other application repositories. It does not embed into or modify those projects.
+## ما يفعله البرنامج
 
+- إدارة مكتبة ألعاب محلية بصيغ ISO وCHD وZSO وCSO.
+- فهرسة مجلدات الألعاب بشكل متكرر والبحث داخل المكتبة.
+- تشغيل اللعبة المحددة مباشرة بواسطة PCSX2 مع خيار ملء الشاشة.
+- فتح إعدادات المحاكي الأولية عبر واجهة PCSX2 نفسها.
+- عرض معلومات النظام وتشغيل اختبارات سلامة اختيارية.
 
-## Safety guarantees
+## متطلبات التشغيل
 
-1. Never format or repartition storage.
-2. Never erase, rename, move, or overwrite game files.
-3. Temporary storage probes use a unique filename, verify bytes after read-back, then attempt cleanup.
-4. No game images are downloaded by the Test Lab.
-5. A test is PASS only if it actually ran and its assertions passed.
-6. Missing prerequisites are BLOCKED, not PASS.
-7. The default workspace should be a disposable test folder. Testing a real USB is an explicit user action.
+- Windows 10/11 x64.
+- نسخة PCSX2 متوافقة ومثبتة محلياً؛ تختار ملف `pcsx2-qt.exe` من إعدادات التطبيق.
+- ملفات ألعاب وملفات نظام PS2 التي يحق للمستخدم استعمالها. لا يتضمن هذا المشروع BIOS أو ألعاباً أو تنزيلات لها.
+- يظل PCSX2 مسؤولاً عن إعدادات الرسوم والصوت وأدوات التحكم والحفظ والتوافق؛ Saad PS2 Emulator واجهة تشغيل وإدارة مكتبة وليس نواة محاكاة مكتوبة من الصفر.
 
-## Planned architecture
+## البناء
 
-```text
-Saadapk-PS2/
-├── electron/
-│   ├── main.cjs
-│   └── preload.cjs
-├── src/
-│   ├── main/
-│   │   ├── runner.cjs
-│   │   ├── checks/
-│   │   └── reports/
-│   ├── renderer/
-│   └── shared/
-├── tests/
-├── scripts/
-└── .github/workflows/
-```
-
-## Development
-
-Requires Node.js 22 LTS or compatible.
+يتطلب Node.js 22 أو أحدث:
 
 ```bash
 npm ci
 npm run lint
 npm test
 npm start
-```
-
-Build the Windows installer:
-
-```bash
 npm run dist:win
 ```
 
-The installer is unsigned unless an Authenticode certificate is configured securely in CI. Never commit signing certificates or passwords.
+## التشغيل الفعلي
 
-## Emulator integration status
+اختر مجلد الألعاب من الواجهة، ثم اختر `pcsx2-qt.exe` في إعدادات المحاكي. اضغط تشغيل على اللعبة. يرسل التطبيق المسار إلى PCSX2 باستخدام صيغة سطر الأوامر الموثقة: `pcsx2-qt.exe -fullscreen -- "game.iso"`.
 
-The Windows desktop app can launch PCSX2 after the user explicitly selects the local PCSX2 executable and a local ISO/CHD/ZSO/CSO file they own. The lab captures process output, exit code, and a local log path. A process launch is not proof of full game compatibility or correct rendering.
+راجع [توثيق خيارات سطر أوامر PCSX2](https://pcsx2.net/docs/advanced/cli/).
 
-A successful software test run does not certify USB hardware, the physical PS2 console, OPL compatibility, or a particular game. Those require separate manual hardware QA.
+## حدود التحقق
+
+اختبارات CI تتحقق من الكود والفهرسة والبناء. لا يمكن لـ CI إثبات تشغيل لعبة على جهاز المستخدم؛ يجب اختبار ذلك على Windows مع محرك PCSX2 وإعداداته وملفات المستخدم. 
