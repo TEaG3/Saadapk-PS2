@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#091321"><title>Saad PS2 Test Lab</title>
+<style>
+:root{color-scheme:dark;--bg:#091321;--panel:#12243a;--line:#29415e;--text:#eef6ff;--muted:#a5b7ca;--cyan:#39c8df;--green:#36c996}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 75% 0,#173b62 0,transparent 48%),var(--bg);color:var(--text);font-family:system-ui,"Segoe UI",Tahoma,sans-serif;line-height:1.8}
+header,main,footer{max-width:1100px;margin:auto;padding:24px}header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}.brand{font-weight:900;font-size:22px;letter-spacing:1px}.brand span{color:var(--cyan)}.tag{color:var(--green);font-size:12px}
+.hero{padding:60px 24px 38px}.eyebrow{color:var(--cyan);font-weight:800;font-size:12px;letter-spacing:2px}.hero h1{font-size:clamp(32px,6vw,58px);line-height:1.2;margin:12px 0}.hero p{color:var(--muted);max-width:700px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px}.card h2{font-size:18px;margin:0 0 8px}.card p{font-size:14px;color:var(--muted);margin:0}.notice{margin:18px 0;padding:16px 20px;border-right:4px solid var(--cyan);background:#10253b;border-radius:10px}
+a{color:#7edcf0}button{background:#176a91;color:white;border:0;padding:12px 18px;border-radius:9px;font:inherit;cursor:pointer}input{max-width:100%;background:#091321;border:1px solid var(--line);padding:10px;border-radius:8px;color:var(--text)}
+#report{margin-top:14px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;color:var(--muted)}
+footer{color:var(--muted);font-size:12px;border-top:1px solid var(--line);margin-top:40px}
+@media(max-width:600px){header{padding:18px}.hero{padding-top:38px}}
+</style></head>
+<body>
+<header><div class="brand">SAAD <span>PS2</span> TEST LAB</div><div class="tag">مركز المختبر المستقل</div></header>
+<main>
+<section class="hero"><div class="eyebrow">INDEPENDENT QUALITY & VALIDATION</div><h1>مختبر اختبار Saad PS2</h1><p>مركز معلومات وتقارير مستقل لمراجعة سلامة مكتبة الألعاب وملفات OPL والتخزين وتكامل المحاكي. يعمل التنفيذ الفعلي على تطبيق Windows المكتبي.</p><p><a href="https://github.com/TEaG3/Saadapk-PS2">المستودع البرمجي على GitHub ↗</a></p></section>
+<section class="grid">
+<article class="card"><h2>فحص التخزين</h2><p>اختبار كتابة وقراءة ومقارنة ملف مؤقت، ثم محاولة حذفه. لا تهيئة ولا حذف لملفات المستخدم.</p></article>
+<article class="card"><h2>فهرسة الألعاب</h2><p>إحصاء ملفات ISO وZSO وCHD وملفات الصور المدعومة، ورصد الملفات الفارغة والتكرارات المحتملة.</p></article>
+<article class="card"><h2>فحص أغلفة OPL</h2><p>مراجعة أنماط أسماء ملفات ART وCOV وICO. لا يدّعي هذا الفحص سلامة الصورة المرئية ما لم تُفحص بياناتها.</p></article>
+<article class="card"><h2>تشغيل PCSX2</h2><p>تطبيق Windows يتيح تحديد ملف المحاكي وملف لعبة محلي تملكه، ثم يسجل حالة العملية ومخرجاتها.</p></article>
+</section>
+<div class="notice"><strong>تنبيه مهم:</strong> هذه الصفحة تعمل داخل المتصفح للعرض وقراءة التقارير فقط. المتصفح لا يستطيع فحص USB مباشرة أو تشغيل ملفات EXE محلية؛ استخدم تطبيق Windows لهذه الاختبارات.</div>
+<section class="card"><h2>عرض تقرير المختبر (JSON)</h2><p>اختر تقريراً محفوظاً من تطبيق Windows لعرض محتواه هنا محلياً داخل المتصفح.</p><p><input id="file" type="file" accept=".json,application/json"></p><button id="load">قراءة التقرير</button><pre id="report">لم يتم اختيار تقرير بعد.</pre></section>
+</main>
+<footer>Saad PS2 Test Lab · مشروع مستقل · لا يتضمن ملفات ألعاب أو روابط تنزيل لها.</footer>
+<script>
+const file=document.getElementById("file"),out=document.getElementById("report");
+document.getElementById("load").addEventListener("click",async()=>{if(!file.files[0]){out.textContent="اختر ملف JSON أولاً.";return;}try{const data=JSON.parse(await file.files[0].text());if(data.application!=="Saad PS2 Test Lab"||!Array.isArray(data.results))throw new Error("صيغة التقرير غير معروفة.");out.textContent=JSON.stringify(data,null,2);}catch(e){out.textContent="تعذر قراءة التقرير: "+e.message;}});
+</script></body></html>
