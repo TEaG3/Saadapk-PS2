@@ -7,7 +7,7 @@
     "start": "electron .",
     "test": "node --test",
     "lint": "node scripts/check-syntax.cjs",
-    "dist:win": "npm run lint && npm test && electron-builder --win nsis"
+    "dist:win": "npm run lint && npm test && electron-builder --win nsis --publish never"
   },
   "devDependencies": {
     "electron": "^39.0.0",
@@ -17,9 +17,25 @@
     "appId": "com.saad.ps2.testlab",
     "productName": "Saad PS2 Test Lab",
     "asar": true,
-    "directories": { "output": "dist" },
-    "files": ["electron/**/*", "src/**/*", "package.json"],
-    "win": { "target": ["nsis"], "artifactName": "Saad-PS2-Test-Lab-Setup-${version}.${ext}" },
-    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true, "createDesktopShortcut": true, "createStartMenuShortcut": true }
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron/**/*",
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "artifactName": "Saad-PS2-Test-Lab-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
   }
 }
