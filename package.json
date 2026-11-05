@@ -1,0 +1,25 @@
+{
+  "name": "saad-ps2-test-lab",
+  "version": "0.1.0",
+  "description": "Standalone Windows test lab for Saad PS2 workflows, USB, artwork, game libraries and emulator integration",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test",
+    "lint": "node scripts/check-syntax.cjs",
+    "dist:win": "npm run lint && npm test && electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^39.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.saad.ps2.testlab",
+    "productName": "Saad PS2 Test Lab",
+    "asar": true,
+    "directories": { "output": "dist" },
+    "files": ["electron/**/*", "src/**/*", "package.json"],
+    "win": { "target": ["nsis"], "artifactName": "Saad-PS2-Test-Lab-Setup-${version}.${ext}" },
+    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true, "createDesktopShortcut": true, "createStartMenuShortcut": true }
+  }
+}
