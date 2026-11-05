@@ -4,17 +4,6 @@
 
 This repository is the dedicated home for the independent Test Lab. It is separate from the Saad PS2 website and its other application repositories. It does not embed into or modify those projects.
 
-## Live online companion\n\n- Website: https://saad-ps2-test-lab-web.vercel.app/\n- The online companion is read-only and can display exported JSON reports. Browser security prevents it from directly scanning USB drives or launching Windows executables.\n- The Windows desktop application performs local storage checks and emulator process launch.\n\n## Current project scope
-
-- Windows desktop application built with Electron.
-- Real, evidence-based test results: PASS, FAIL, BLOCKED, and NOT_RUN.
-- Safe USB folder write/read/compare/cleanup test using a temporary file only.
-- Game library inventory and basic file/serial checks.
-- OPL ART filename validation.
-- Read-only inspection of a user-selected project folder.
-- Explicit PCSX2 launch from the Windows app using a user-selected local executable and game image, with process output and exit status logged.
-- JSON test report export.
-- Windows CI build and automated unit tests.
 
 ## Safety guarantees
 
