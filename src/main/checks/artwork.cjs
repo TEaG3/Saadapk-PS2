@@ -22,7 +22,7 @@ function imageInfo(buffer,ext){
 async function artworkCheck(root){
  try{
   const dir=path.join(path.resolve(root),"ART"),entries=await fs.readdir(dir,{withFileTypes:true});
-  const candidates=entries.filter(x=>x.isFile()&&(/_COV\\.(jpg|jpeg|png)$/i.test(x.name)||/_ICO\\.png$/i.test(x.name)));
+  const candidates=entries.filter(x=>x.isFile()&&(/_COV\.(jpg|jpeg|png)$/i.test(x.name)||/_ICO\.png$/i.test(x.name)));
   const checked=[],invalid=[];
   for(const item of candidates){
    try{const ext=path.extname(item.name).toLowerCase(),info=imageInfo(await fs.readFile(path.join(dir,item.name)),ext);
