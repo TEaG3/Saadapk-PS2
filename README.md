@@ -4,7 +4,7 @@
 
 This repository is the dedicated home for the independent Test Lab. It is separate from the Saad PS2 website and its other application repositories. It does not embed into or modify those projects.
 
-## Initial project scope
+## Live online companion\n\n- Website: https://saad-ps2-test-lab-web.vercel.app/\n- The online companion is read-only and can display exported JSON reports. Browser security prevents it from directly scanning USB drives or launching Windows executables.\n- The Windows desktop application performs local storage checks and emulator process launch.\n\n## Current project scope
 
 - Windows desktop application built with Electron.
 - Real, evidence-based test results: PASS, FAIL, BLOCKED, and NOT_RUN.
@@ -12,7 +12,7 @@ This repository is the dedicated home for the independent Test Lab. It is separa
 - Game library inventory and basic file/serial checks.
 - OPL ART filename validation.
 - Read-only inspection of a user-selected project folder.
-- Emulator executable detection. Launch/ROM execution will require a later explicit, user-controlled integration step.
+- Explicit PCSX2 launch from the Windows app using a user-selected local executable and game image, with process output and exit status logged.
 - JSON test report export.
 - Windows CI build and automated unit tests.
 
@@ -66,6 +66,6 @@ The installer is unsigned unless an Authenticode certificate is configured secur
 
 ## Emulator integration status
 
-The initial scaffold only checks the selected emulator executable's presence and metadata. It does not yet launch PCSX2/DuckStation or load a game. That behavior will be implemented only with explicit user selection of an emulator and user-owned game image, with logs and exit status captured. No success is inferred from file existence.
+The Windows desktop app can launch PCSX2 after the user explicitly selects the local PCSX2 executable and a local ISO/CHD/ZSO/CSO file they own. The lab captures process output, exit code, and a local log path. A process launch is not proof of full game compatibility or correct rendering.
 
 A successful software test run does not certify USB hardware, the physical PS2 console, OPL compatibility, or a particular game. Those require separate manual hardware QA.
