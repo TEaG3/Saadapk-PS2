@@ -1,7 +1,7 @@
 {
-  "name": "saad-ps2-test-lab",
+  "name": "saad-ps2-emulator",
   "version": "0.1.0",
-  "description": "Standalone Windows test lab for Saad PS2 workflows, USB, artwork, game libraries and emulator integration",
+  "description": "Arabic PS2 game launcher frontend powered by the PCSX2 emulator engine",
   "main": "electron/main.cjs",
   "scripts": {
     "start": "electron .",
@@ -14,8 +14,8 @@
     "electron-builder": "^26.0.12"
   },
   "build": {
-    "appId": "com.saad.ps2.testlab",
-    "productName": "Saad PS2 Test Lab",
+    "appId": "com.saad.ps2.emulator",
+    "productName": "Saad PS2 Emulator",
     "asar": true,
     "directories": {
       "output": "dist"
@@ -29,7 +29,7 @@
       "target": [
         "nsis"
       ],
-      "artifactName": "Saad-PS2-Test-Lab-Setup-${version}.${ext}"
+      "artifactName": "Saad-PS2-Emulator-Setup-${version}.${ext}"
     },
     "nsis": {
       "oneClick": false,
