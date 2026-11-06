@@ -1,6 +1,7 @@
 "use strict";
 const test=require("node:test"),assert=require("node:assert/strict"),os=require("node:os"),fs=require("node:fs/promises"),path=require("node:path"),crypto=require("node:crypto");
-const {scanGameFolders}=require("../src/main/library.cjs");\nconst {storageCheck} = require("../src/main/checks/storage.cjs"),{environmentCheck}=require("../src/main/checks/environment.cjs"),{buildReport}=require("../src/main/reports/report.cjs"),{artworkCheck}=require("../src/main/checks/artwork.cjs");
+const {scanGameFolders}=require("../src/main/library.cjs");
+const {storageCheck} = require("../src/main/checks/storage.cjs"),{environmentCheck}=require("../src/main/checks/environment.cjs"),{buildReport}=require("../src/main/reports/report.cjs"),{artworkCheck}=require("../src/main/checks/artwork.cjs");
 test("environment probe passes",async()=>assert.equal((await environmentCheck()).status,"PASS"));
 test("storage round-trip checks 4 MiB and cleans up",async()=>{const d=await fs.mkdtemp(path.join(os.tmpdir(),"saad-lab-"));try{const r=await storageCheck(d);assert.equal(r.status,"PASS");assert.equal(r.details.bytes,4*1024*1024);assert.deepEqual(await fs.readdir(d),[]);}finally{await fs.rm(d,{recursive:true,force:true});}});
 test("non-directory storage target fails",async()=>{const f=path.join(os.tmpdir(),"saad-lab-"+crypto.randomUUID());await fs.writeFile(f,"x");try{assert.equal((await storageCheck(f)).status,"FAIL");}finally{await fs.unlink(f);}});
